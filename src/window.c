@@ -671,3 +671,4 @@ GLFWAPI void glfwWaitEvents(void)
     _GLFW_REQUIRE_INIT();
     _glfwPlatformWaitEvents();
 }
+
