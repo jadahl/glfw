@@ -13,6 +13,13 @@ GLFW now provides a callback for receiving the paths of files dropped onto GLFW
 windows.  The callback is set with the @ref glfwSetDropCallback function.
 
 
+@subsection news_31_getcursorpos Direct query for cursor position
+
+GLFW now queries the system cursor position directly when you call @ref
+glfwGetCursorPos instead of returning cached data, except for when the window is
+in captured cursor mode.
+
+
 @section news_30 New features in version 3.0
 
 @subsection news_30_cmake CMake build system
