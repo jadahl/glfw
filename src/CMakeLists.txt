@@ -28,9 +28,12 @@ elseif (_GLFW_X11)
                      xkb_unicode.c linux_joystick.c posix_time.c posix_tls.c)
 elseif (_GLFW_WAYLAND)
     set(glfw_HEADERS ${common_HEADERS} wl_platform.h linux_joystick.h
-                     posix_time.h posix_tls.h xkb_unicode.h)
+                     posix_time.h posix_tls.h xkb_unicode.h
+                     pointer-lock-client-protocol.h
+                     relative-pointer-client-protocol.h)
     set(glfw_SOURCES ${common_SOURCES} wl_init.c wl_monitor.c wl_window.c
-                     linux_joystick.c posix_time.c posix_tls.c xkb_unicode.c)
+                     linux_joystick.c posix_time.c posix_tls.c xkb_unicode.c
+                     pointer-lock-protocol.c relative-pointer-protocol.c)
 elseif (_GLFW_MIR)
     set(glfw_HEADERS ${common_HEADERS} mir_platform.h linux_joystick.h
                      posix_time.h posix_tls.h xkb_unicode.h)
