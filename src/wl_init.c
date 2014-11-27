@@ -80,12 +80,7 @@ static void pointerHandleMotion(void* data,
         return;
 
     if (window->cursorMode == GLFW_CURSOR_DISABLED)
-    {
-        /* TODO */
-        _glfwInputError(GLFW_PLATFORM_ERROR,
-                        "Wayland: GLFW_CURSOR_DISABLED not supported");
         return;
-    }
 
     _glfwInputCursorMotion(window,
                            wl_fixed_to_double(sx),
@@ -517,6 +512,20 @@ static void registryHandleGlobal(void* data,
                 wl_registry_bind(registry, name, &wl_seat_interface, 1);
             wl_seat_add_listener(_glfw.wl.seat, &seatListener, NULL);
         }
+    }
+    else if (strcmp(interface, "_wl_relative_pointer_manager") == 0)
+    {
+        _glfw.wl.relativePointerManager =
+            wl_registry_bind(registry, name,
+                             &_wl_relative_pointer_manager_interface,
+                             1);
+    }
+    else if (strcmp(interface, "_wl_pointer_lock") == 0)
+    {
+        _glfw.wl.pointerLock =
+            wl_registry_bind(registry, name,
+                             &_wl_pointer_lock_interface,
+                             1);
     }
 }
 

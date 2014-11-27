@@ -37,6 +37,9 @@
  #error "The Wayland backend depends on EGL platform support"
 #endif
 
+#include "relative-pointer-client-protocol.h"
+#include "pointer-lock-client-protocol.h"
+
 #include "posix_tls.h"
 #include "posix_time.h"
 #include "linux_joystick.h"
@@ -67,6 +70,11 @@ typedef struct _GLFWwindowWayland
     EGLSurface                  egl_surface;
     struct wl_callback*         callback;
     _GLFWcursor*                currentCursor;
+
+    struct {
+        struct _wl_relative_pointer*    relativePointer;
+        struct _wl_locked_pointer*      lockedPointer;
+    } pointerLock;
 } _GLFWwindowWayland;
 
 
@@ -82,6 +90,9 @@ typedef struct _GLFWlibraryWayland
     struct wl_seat*             seat;
     struct wl_pointer*          pointer;
     struct wl_keyboard*         keyboard;
+
+    struct _wl_relative_pointer_manager* relativePointerManager;
+    struct _wl_pointer_lock*    pointerLock;
 
     struct wl_cursor_theme*     cursorTheme;
     struct wl_cursor*           defaultCursor;
